@@ -8390,7 +8390,7 @@ justify-content: flex-start;
 
 
 /* =========================================
-   6. Mobile Responsiveness (New)
+   6. Mobile Responsiveness (Comprehensive)
    ========================================= */
 
 @media (max-width: 900px) {
@@ -8400,60 +8400,150 @@ justify-content: flex-start;
         padding: 0 1rem;
     }
 
-
     .nav-menu {
         position: fixed;
-        top: 80px;
+        top: 70px;
         left: 0;
         width: 100%;
-        background: var(--glass-bg);
-        backdrop-filter: var(--glass-blur);
-        -webkit-backdrop-filter: var(--glass-blur);
-        border-bottom: var(--glass-border);
-        padding: 2rem;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        background: var(--bg-card);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border-color);
+        padding: 1.5rem 2rem 2rem;
         transform: translateY(-150%);
         transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         z-index: 999;
         display: block;
-        /* Ensure it's block for transform to work */
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
     }
-
 
     .nav-menu.active {
         transform: translateY(0);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
-
 
     .nav-list {
         flex-direction: column;
-        gap: 1.5rem;
-        text-align: center;
+        gap: 0;
+        text-align: left;
     }
-
 
     .nav-link {
-        font-size: 1.2rem;
+        font-size: 1.05rem;
         display: block;
-        padding: 0.5rem 0;
+        padding: 0.9rem 0;
+        border-bottom: 1px solid var(--border-color);
     }
-
+    
+    .nav-link:last-child {
+        border-bottom: none;
+    }
 
     .mobile-toggle {
-        display: block;
-        /* Show hamburger */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-color);
+        font-size: 1.1rem;
     }
 
-
-    /* Hide desktop actions on mobile if needed, or adapt */
+    /* Show auth buttons inside mobile menu via JS injection */
     .header-actions {
         display: none;
-        /* Simplify header for mobile */
     }
-
-
-    /* Ensure Header actions are accessible inside menu if moved, 
-       but for now let's just show minimal actions or rely on menu links */
+    
+    /* Mobile Auth Area (injected by JS into nav-menu) */
+    .mobile-auth-area {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border-color);
+    }
+    
+    .mobile-auth-area .btn {
+        width: 100%;
+        text-align: center;
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
+    }
+    
+    /* Mobile Profile inside menu */
+    .mobile-profile-area {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 1.5rem;
+        padding: 1rem;
+        background: var(--bg-light);
+        border-radius: var(--radius-md);
+    }
+    
+    .mobile-profile-area .profile-avatar-initial {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--primary-color);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 1rem;
+    }
+    
+    .mobile-profile-area .profile-info {
+        flex: 1;
+    }
+    
+    .mobile-profile-area .profile-info strong {
+        display: block;
+        font-size: 0.95rem;
+        color: var(--text-dark);
+    }
+    
+    .mobile-profile-area .profile-info span {
+        font-size: 0.8rem;
+        color: var(--text-light);
+    }
+    
+    .mobile-nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        margin-top: 0.75rem;
+    }
+    
+    .mobile-nav-links a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0.75rem 0.5rem;
+        color: var(--text-dark);
+        text-decoration: none;
+        font-size: 0.95rem;
+        border-bottom: 1px solid var(--border-color);
+        transition: background 0.2s;
+    }
+    
+    .mobile-nav-links a:hover {
+        background: var(--bg-light);
+    }
+    
+    .mobile-nav-links a i {
+        width: 20px;
+        text-align: center;
+        color: var(--text-light);
+    }
+    
+    .mobile-nav-links a.text-danger {
+        color: #ef4444;
+    }
 
     /* Hero Section */
     .hero-container {
@@ -8462,30 +8552,39 @@ justify-content: flex-start;
         text-align: center;
     }
 
-
     .hero-content {
         padding-right: 0;
         margin-top: 2rem;
     }
 
+    .hero-title {
+        font-size: 1.8rem;
+        line-height: 1.3;
+    }
+    
+    .hero-subtitle {
+        font-size: 0.95rem;
+    }
 
     .hero-buttons {
         justify-content: center;
+        flex-wrap: wrap;
     }
-
 
     .hero-stats {
         justify-content: center;
         flex-wrap: wrap;
-        gap: 2rem;
+        gap: 1.5rem;
     }
-
 
     .hero-shape {
         display: none;
-        /* Hide shape on mobile to save space/layout issues */
     }
 
+    /* Section Titles */
+    .section-title {
+        font-size: 1.5rem;
+    }
 
     /* Course Cards */
     .scrolling-grid {
@@ -8493,45 +8592,127 @@ justify-content: flex-start;
         padding: 0 1rem 2rem 1rem;
     }
 
-
     .course-card {
         width: 280px;
-        /* Smaller width for mobile swipe */
         flex: 0 0 280px;
     }
 
-
-    /* Blogs Grid */
+    /* Blog Cards */
     .blog-card {
         min-width: 280px;
-        /* Ensure blog cards invoke scroll behavior */
     }
-
+    
+    /* Blog Layout */
+    .blog-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .blog-sidebar {
+        order: -1;
+    }
+    
+    /* Featured Blog Carousel */
+    .featured-blog-card.featured-slide {
+        flex-direction: column;
+    }
+    
+    .featured-blog-img-wrapper {
+        min-height: 200px;
+    }
+    
+    .featured-blog-content {
+        padding: 1.5rem;
+    }
+    
+    .featured-blog-content .blog-title.is-large,
+    .featured-blog-content h2 {
+        font-size: 1.3rem !important;
+    }
 
     /* Fatwa Layout */
     .fatwa-layout {
         grid-template-columns: 1fr;
     }
 
-
     .sidebar-widget {
         display: none;
-        /* Hide sidebar on mobile or move to bottom */
     }
 
+    /* Page Header */
+    .page-header {
+        padding: 100px 0 40px;
+    }
+    
+    .page-header h1 {
+        font-size: 1.6rem;
+    }
 
-    /* Search Overlay Input */
+    /* Cards Grid */
+    .features-grid,
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* CTA Box */
+    .cta-box {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem 1.5rem;
+    }
+
+    .cta-decoration i {
+        display: none;
+    }
+
+    /* Footer */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    /* Search Overlay */
     .search-field-container {
         width: 95%;
         padding: 1.5rem;
     }
 
-
     .search-overlay-input {
         font-size: 1.2rem;
     }
 
-
+    /* Container padding */
+    .container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    /* Course Detail */
+    .course-detail-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Kitab Layout */
+    .kitab-content-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Profile Modal */
+    .profile-modal-container {
+        width: 95%;
+        max-width: 100%;
+        margin: 1rem;
+    }
+    
+    /* Ad Carousel */
+    .ad-carousel-track {
+        height: 140px;
+    }
 }
 /* Add a class to body to prevent scrolling when menu is open */
 body.menu-open {

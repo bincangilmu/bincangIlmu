@@ -2626,6 +2626,65 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+    
+    // Inject auth/profile into mobile nav menu
+    function updateMobileNav() {
+        if (window.innerWidth > 900) return;
+        const navMenu = document.querySelector('.nav-menu');
+        if (!navMenu) return;
+        
+        // Remove old mobile area if exists
+        const oldArea = navMenu.querySelector('.mobile-auth-area, .mobile-profile-area, .mobile-nav-links');
+        if (oldArea) oldArea.remove();
+        const oldArea2 = navMenu.querySelector('.mobile-auth-area, .mobile-profile-area, .mobile-nav-links');
+        if (oldArea2) oldArea2.remove();
+        const oldArea3 = navMenu.querySelector('.mobile-auth-area, .mobile-profile-area, .mobile-nav-links');
+        if (oldArea3) oldArea3.remove();
+        
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        
+        if (isLoggedIn && currentUser) {
+            // Show profile + menu links
+            const profileArea = document.createElement('div');
+            profileArea.className = 'mobile-profile-area';
+            profileArea.innerHTML = `
+                <div class="profile-avatar-initial">${currentUser.name.charAt(0).toUpperCase()}</div>
+                <div class="profile-info">
+                    <strong>${currentUser.name}</strong>
+                    <span>${currentUser.email}</span>
+                </div>
+            `;
+            navMenu.appendChild(profileArea);
+            
+            const navLinks = document.createElement('div');
+            navLinks.className = 'mobile-nav-links';
+            let adminLink = '';
+            if (currentUser.role === 'Admin' || currentUser.role === 'Pengajar') {
+                adminLink = '<a href="admin.html"><i class="fas fa-tachometer-alt"></i> Akses Dasbor</a>';
+            }
+            navLinks.innerHTML = `
+                ${adminLink}
+                <a href="#" onclick="openProfileModal('settings'); return false;"><i class="fas fa-user-cog"></i> Pengaturan Profil</a>
+                <a href="#" onclick="openProfileModal('courses'); return false;"><i class="fas fa-book-reader"></i> Kursus Saya</a>
+                <a href="#" onclick="openProfileModal('certificates'); return false;"><i class="fas fa-certificate"></i> Sertifikat</a>
+                <a href="#" onclick="handleLogout(); return false;" class="text-danger"><i class="fas fa-sign-out-alt"></i> Log Out</a>
+            `;
+            navMenu.appendChild(navLinks);
+        } else {
+            // Show login/register buttons
+            const authArea = document.createElement('div');
+            authArea.className = 'mobile-auth-area';
+            authArea.innerHTML = `
+                <a href="#" class="btn btn-outline" onclick="openModal('login'); return false;">Masuk</a>
+                <a href="#" class="btn btn-primary" onclick="openModal('register'); return false;">Daftar Sekarang</a>
+            `;
+            navMenu.appendChild(authArea);
+        }
+    }
+    
+    updateMobileNav();
+    window.addEventListener('resize', updateMobileNav);
 });
 
 // =========================================
