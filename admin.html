@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Bincang Ilmu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=218">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+
+    <!-- Admin Layout -->
+    <div class="admin-layout">
+        
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">
+                <a href="index.html">
+                    <span>bincang</span><span class="highlight">ilmu</span>.
+                </a>
+                <div class="admin-badge">Admin Panel</div>
+            </div>
+            
+            <nav class="admin-nav">
+                <a href="#" class="admin-nav-link active" onclick="switchTab('dashboard', this)">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+                <a href="#" class="admin-nav-link" onclick="switchTab('courses', this)">
+                    <i class="fas fa-graduation-cap"></i> Kelola Kursus
+                </a>
+                <a href="#" class="admin-nav-link" onclick="switchTab('kitabs', this)">
+                    <i class="fas fa-book-open"></i> Kelola Kitab
+                </a>
+                <a href="#" class="admin-nav-link" onclick="switchTab('blogs', this)">
+                    <i class="fas fa-pen-nib"></i> Kelola Artikel
+                </a>
+                <a href="#" class="admin-nav-link" onclick="switchTab('fatwas', this)">
+                    <i class="fas fa-balance-scale"></i> Kelola Fatwa
+                </a>
+                <a href="#" class="admin-nav-link" onclick="switchTab('ads', this)">
+                    <i class="fas fa-bullhorn"></i> Kelola Iklan
+                </a>
+                <a href="#" class="admin-nav-link" onclick="switchTab('users', this)">
+                    <i class="fas fa-users"></i> Kelola Pengguna
+                </a>
+                <a href="#" class="admin-nav-link" onclick="switchTab('settings', this)">
+                    <i class="fas fa-cog"></i> Pengaturan
+                </a>
+            </nav>
+            
+            <div class="admin-sidebar-footer">
+                <a href="index.html" class="btn btn-outline-primary" style="width:100%; text-align:center;">
+                    <i class="fas fa-external-link-alt"></i> Lihat Website
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            
+            <!-- Dashboard Tab -->
+            <section id="tab-dashboard" class="admin-section active">
+                <div class="admin-header">
+                    <h1>Selamat Datang, Admin</h1>
+                    <p>Ringkasan sistem penyimpanan lokal Anda.</p>
+                </div>
+                
+                <div class="admin-stats-grid">
+                    <div class="admin-stat-card">
+                        <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+                        <div class="info">
+                            <h3 id="statCourseCount">0</h3>
+                            <p>Total Kursus</p>
+                        </div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="icon"><i class="fas fa-book-open"></i></div>
+                        <div class="info">
+                            <h3 id="statKitabCount">0</h3>
+                            <p>Total Kitab</p>
+                        </div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="icon"><i class="fas fa-pen-nib"></i></div>
+                        <div class="info">
+                            <h3 id="statBlogCount">0</h3>
+                            <p>Total Artikel</p>
+                        </div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="icon"><i class="fas fa-balance-scale"></i></div>
+                        <div class="info">
+                            <h3 id="statFatwaCount">0</h3>
+                            <p>Total Fatwa</p>
+                        </div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="icon" style="background: rgba(16, 185, 129, 0.1); color: #10b981;"><i class="fas fa-users"></i></div>
+                        <div class="info">
+                            <h3 id="statUserCount">0</h3>
+                            <p>Total Pengguna</p>
+                        </div>
+                    </div>
+                    <div class="admin-stat-card">
+                        <div class="icon" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;"><i class="fas fa-bullhorn"></i></div>
+                        <div class="info">
+                            <h3 id="statAdCount">0</h3>
+                            <p>Total Iklan</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Kursus Tab -->
+            <section id="tab-courses" class="admin-section" style="display:none;">
+                <div class="admin-header flex-between">
+                    <div>
+                        <h1>Kelola Kursus</h1>
+                        <p>Tambah, edit, atau hapus kursus video.</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="openCourseModal()">
+                        <i class="fas fa-plus"></i> Tambah Kursus
+                    </button>
+                </div>
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Judul Kursus</th>
+                                <th>Instruktur</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="courseTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Kitab Tab -->
+            <section id="tab-kitabs" class="admin-section" style="display:none;">
+                <div class="admin-header flex-between">
+                    <div>
+                        <h1>Kelola Kitab</h1>
+                        <p>Tambah, edit, atau hapus koleksi kitab.</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="openKitabModal()">
+                        <i class="fas fa-plus"></i> Tambah Kitab Baru
+                    </button>
+                </div>
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Judul Kitab</th>
+                                <th>Kategori</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="kitabTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Blog Tab -->
+            <section id="tab-blogs" class="admin-section" style="display:none;">
+                <div class="admin-header flex-between">
+                    <div>
+                        <h1>Kelola Artikel</h1>
+                        <p>Tambah, edit, atau hapus artikel blog.</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="openBlogModal()">
+                        <i class="fas fa-plus"></i> Tambah Artikel
+                    </button>
+                </div>
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Judul Artikel</th>
+                                <th>Penulis</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="blogTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Fatwa Tab -->
+            <section id="tab-fatwas" class="admin-section" style="display:none;">
+                <div class="admin-header flex-between">
+                    <div>
+                        <h1>Kelola Fatwa</h1>
+                        <p>Tambah, edit, atau hapus tanya jawab fatwa.</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="openFatwaModal()">
+                        <i class="fas fa-plus"></i> Tambah Fatwa
+                    </button>
+                </div>
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Judul Pertanyaan</th>
+                                <th>Mufti</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fatwaTableBody"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Ads Tab -->
+            <section id="tab-ads" class="admin-section" style="display:none;">
+                <div class="admin-header flex-between">
+                    <div>
+                        <h1>Kelola Iklan</h1>
+                        <p>Atur iklan CTA/promo dan banner atas yang tampil di website Anda.</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="openAdModal()">
+                        <i class="fas fa-plus"></i> Tambah Iklan
+                    </button>
+                </div>
+
+                <!-- Ad CRUD Table -->
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tipe</th>
+                                <th>Judul</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adTableBody"></tbody>
+                    </table>
+                </div>
+
+                <!-- Top Ad Banner Settings -->
+                <style>
+                .switch input { display:none; }
+                .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
+                .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+                .switch input:checked + .slider { background-color: var(--primary-color); }
+                .switch input:checked + .slider:before { transform: translateX(26px); }
+                </style>
+                <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 2rem; margin-top: 1.5rem; margin-bottom: 2rem;">
+                    <h3 style="color: var(--primary-dark); margin-bottom: 1rem;"><i class="fas fa-bullhorn"></i> Pengaturan Iklan Banner Atas (Top Bar)</h3>
+                    <form id="topAdForm" onsubmit="saveTopAd(event)">
+                        <div class="form-group" style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                            <label style="margin-bottom: 0;">Status Iklan:</label>
+                            <label class="switch" style="position: relative; display: inline-block; width: 50px; height: 24px;">
+                                <input type="checkbox" id="topAdStatus">
+                                <span class="slider"></span>
+                            </label>
+                            <span id="topAdStatusText" style="font-weight: 500;">Nonaktif</span>
+                        </div>
+                        <div class="form-group">
+                            <label>Teks Promo / Iklan (Wajib)</label>
+                            <input type="text" id="topAdText" placeholder="Contoh: Diskon 50% Semua Kursus Spesial Ramadhan!" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Teks Tombol Aksi (Opsional)</label>
+                            <input type="text" id="topAdBtnText" placeholder="Contoh: Daftar Sekarang">
+                        </div>
+                        <div class="form-group">
+                            <label>URL / Link Tujuan (Opsional)</label>
+                            <input type="text" id="topAdLink" placeholder="https://...">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="padding: 0.8rem 1.5rem;"><i class="fas fa-save"></i> Simpan Pengaturan Iklan</button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="tab-users" class="admin-section" style="display:none;">
+                <div class="admin-header">
+                    <h1>Kelola Pengguna</h1>
+                    <p>Atur akun siswa, pengajar, dan admin sistem.</p>
+                    <button class="btn btn-primary" onclick="openModal('userModal')" style="margin-top: 1rem;">
+                        <i class="fas fa-plus"></i> Tambah Pengguna
+                    </button>
+                </div>
+                <div class="admin-table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Nama Lengkap</th>
+                                <th>Email</th>
+                                <th>Password</th>
+                                <th>Peran (Role)</th>
+                                <th>Tanggal Daftar</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- Users injected here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="tab-settings" class="admin-section" style="display:none;">
+                <div class="admin-header">
+                    <h1>Pengaturan Sistem</h1>
+                    <p>Konfigurasi lanjutan dan pemeliharaan data.</p>
+                </div>
+                
+                
+                <style>
+                .switch input { display:none; }
+                .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 34px; }
+                .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+                .switch input:checked + .slider { background-color: var(--primary-color); }
+                .switch input:checked + .slider:before { transform: translateX(26px); }
+                </style>
+                
+                <div style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 2rem; margin-top: 1.5rem;">
+                    <h3 style="color: var(--danger-color); margin-bottom: 0.5rem;"><i class="fas fa-exclamation-triangle"></i> Zona Berbahaya (Zona Merah)</h3>
+                    <p style="color: var(--text-light); margin-bottom: 1.5rem; line-height: 1.6;">
+                        Tindakan di bawah ini bersifat permanen dan tidak dapat dibatalkan. Jika Anda mereset data, semua modifikasi, kursus, kitab, dan artikel tambahan yang Anda buat akan dihapus seluruhnya dari memori <i>browser</i> ini, dan <i>website</i> akan kembali ke versi data bawaan awal.
+                    </p>
+                    <button onclick="resetAllData()" class="btn btn-danger" style="padding: 0.8rem 1.5rem; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-trash-alt"></i> Reset Semua Data ke Bawaan Pabrik
+                    </button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modals -->
+
+    <!-- Modal Kursus -->
+    <div id="courseModal" class="admin-modal">
+        <div class="admin-modal-content" style="max-width: 700px;">
+            <div class="admin-modal-header">
+                <h2 id="courseModalTitle">Tambah Kursus</h2>
+                <button class="close-modal" onclick="closeModal('courseModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="admin-modal-body">
+                <form id="courseForm" onsubmit="saveCourse(event)">
+                    <!-- Grid Layout for Basic Info -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label>ID Kursus (Unik)</label>
+                            <input type="text" id="courseKey" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Judul Kursus</label>
+                            <input type="text" id="courseTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Instruktur</label>
+                            <input type="text" id="courseInstructor" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Kategori</label>
+                            <input type="text" id="courseCategory" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>URL Gambar Thumbnail (Opsional)</label>
+                        <input type="text" id="courseImage" placeholder="https://...">
+                    </div>
+                    <div class="form-group">
+                        <label>Deskripsi</label>
+                        <textarea id="courseDesc" rows="3" required></textarea>
+                    </div>
+
+                    <!-- Curriculum Builder -->
+                    <div class="form-group" style="margin-top: 2rem; border-top: 1px solid #eee; padding-top: 1rem;">
+                        <label style="font-size: 1.1rem; color: var(--primary-dark); margin-bottom: 1rem;"><i class="fas fa-list-ul"></i> Kurikulum / Video</label>
+                        <div id="curriculumBuilder">
+                            <!-- Modules injected here -->
+                        </div>
+                        <button type="button" class="btn btn-outline-primary" onclick="addModuleUI()" style="margin-top:10px;"><i class="fas fa-plus"></i> Tambah Modul Baru</button>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width:100%; margin-top:2rem;">Simpan Kursus</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Kitab (Existing) -->
+    <div id="kitabModal" class="admin-modal">
+        <div class="admin-modal-content">
+            <div class="admin-modal-header">
+                <h2 id="kitabModalTitle">Tambah Kitab Baru</h2>
+                <button class="close-modal" onclick="closeModal('kitabModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="admin-modal-body">
+                <form id="kitabForm" onsubmit="saveKitab(event)">
+                    <div class="form-group">
+                        <label>ID Kitab (Unik, huruf kecil tanpa spasi)</label>
+                        <input type="text" id="kitabKey" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Judul Kitab</label>
+                        <input type="text" id="kitabTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Penulis</label>
+                        <input type="text" id="kitabAuthor" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Kategori</label>
+                        <input type="text" id="kitabCategory" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Deskripsi Singkat</label>
+                        <textarea id="kitabDesc" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>URL Cover Kitab (Opsional)</label>
+                        <input type="text" id="kitabImage" placeholder="https://...">
+                    </div>
+                    <div class="form-group">
+                        <label>Warna Background Cover (HEX)</label>
+                        <input type="text" id="kitabBg" value="#e0e7ff" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%;">Simpan Kitab</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Blog -->
+    <div id="blogModal" class="admin-modal">
+        <div class="admin-modal-content">
+            <div class="admin-modal-header">
+                <h2 id="blogModalTitle">Tambah Artikel</h2>
+                <button class="close-modal" onclick="closeModal('blogModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="admin-modal-body">
+                <form id="blogForm" onsubmit="saveBlog(event)">
+                    <div class="form-group">
+                        <label>ID Artikel (Unik, huruf kecil tanpa spasi)</label>
+                        <input type="text" id="blogKey" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Judul Artikel</label>
+                        <input type="text" id="blogTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Penulis</label>
+                        <input type="text" id="blogAuthor" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Kategori</label>
+                        <input type="text" id="blogCategory" required>
+                    </div>
+                    <div class="form-group">
+                        <label>URL Gambar Thumbnail (Opsional)</label>
+                        <input type="text" id="blogImage" placeholder="https://...">
+                    </div>
+                    <div class="form-group">
+                        <label>Ringkasan (Excerpt)</label>
+                        <textarea id="blogExcerpt" rows="2" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Konten (HTML Allowed)</label>
+                        <textarea id="blogContent" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%;">Simpan Artikel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Pengguna -->
+    <div id="userModal" class="admin-modal">
+        <div class="admin-modal-content">
+            <div class="admin-modal-header">
+                <h2 id="userModalTitle">Tambah Pengguna</h2>
+                <button class="close-modal" onclick="closeModal('userModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="admin-modal-body">
+                <form id="userForm" onsubmit="saveUser(event)">
+                    <input type="hidden" id="userOriginalEmail">
+                    <div class="form-group">
+                        <label>Nama Lengkap</label>
+                        <input type="text" id="userName" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="userEmail" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Password (Kosongkan jika tidak ingin mengubah saat edit)</label>
+                        <input type="password" id="userPassword" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Peran (Role)</label>
+                        <select id="userRole" required class="form-control">
+                            <option value="Siswa">Siswa</option>
+                            <option value="Pengajar">Pengajar</option>
+                            <option value="Admin">Admin</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Simpan Pengguna</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Fatwa -->
+    <div id="fatwaModal" class="admin-modal">
+        <div class="admin-modal-content">
+            <div class="admin-modal-header">
+                <h2 id="fatwaModalTitle">Tambah Fatwa</h2>
+                <button class="close-modal" onclick="closeModal('fatwaModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="admin-modal-body">
+                <form id="fatwaForm" onsubmit="saveFatwa(event)">
+                    <div class="form-group">
+                        <label>ID Fatwa (Unik, huruf kecil tanpa spasi)</label>
+                        <input type="text" id="fatwaKey" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Judul Pertanyaan</label>
+                        <input type="text" id="fatwaTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mufti / Penjawab</label>
+                        <input type="text" id="fatwaMufti" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Kategori</label>
+                        <input type="text" id="fatwaCategory" required>
+                    </div>
+                    <div class="form-group">
+                        <label>URL Gambar Thumbnail (Opsional)</label>
+                        <input type="text" id="fatwaImage" placeholder="https://...">
+                    </div>
+                    <div class="form-group">
+                        <label>Isi Pertanyaan Lengkap (HTML Allowed)</label>
+                        <textarea id="fatwaQuestion" rows="3" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Jawaban (HTML Allowed)</label>
+                        <textarea id="fatwaAnswer" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%;">Simpan Fatwa</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Iklan -->
+    <div id="adModal" class="admin-modal">
+        <div class="admin-modal-content" style="max-width: 650px;">
+            <div class="admin-modal-header">
+                <h2 id="adModalTitle">Tambah Iklan Baru</h2>
+                <button class="close-modal" onclick="closeModal('adModal')"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="admin-modal-body">
+                <form id="adForm" onsubmit="saveAd(event)">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label>ID Iklan (Unik, huruf kecil)</label>
+                            <input type="text" id="adKey" required placeholder="contoh: ad_ramadhan">
+                        </div>
+                        <div class="form-group">
+                            <label>Tipe Iklan</label>
+                            <select id="adType" required class="form-control">
+                                <option value="cta">CTA (Call to Action)</option>
+                                <option value="promo">Promo</option>
+                                <option value="info">Informasi</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Judul Iklan</label>
+                        <input type="text" id="adTitle" required placeholder="Judul utama iklan">
+                    </div>
+                    <div class="form-group">
+                        <label>Subjudul (Opsional)</label>
+                        <input type="text" id="adSubtitle" placeholder="Teks pendamping judul">
+                    </div>
+                    <div class="form-group">
+                        <label>Deskripsi (HTML Allowed)</label>
+                        <textarea id="adDesc" rows="3" required placeholder="Isi konten iklan"></textarea>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label>Teks Badge (Opsional)</label>
+                            <input type="text" id="adBadgeText" placeholder="contoh: Informasi Penting">
+                        </div>
+                        <div class="form-group">
+                            <label>Ikon Badge (Font Awesome)</label>
+                            <input type="text" id="adBadgeIcon" placeholder="contoh: fas fa-bullhorn">
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label>Teks Tombol</label>
+                            <input type="text" id="adButtonText" required placeholder="contoh: Daftar Sekarang">
+                        </div>
+                        <div class="form-group">
+                            <label>Link Tombol</label>
+                            <input type="text" id="adButtonLink" required placeholder="contoh: courses.html">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Ikon Utama (Font Awesome)</label>
+                        <input type="text" id="adIcon" required placeholder="contoh: fas fa-mosque">
+                    </div>
+                    <div class="form-group">
+                        <label>URL Gambar Iklan (Opsional — jika diisi, tampilan berbasis gambar)</label>
+                        <input type="text" id="adImageUrl" placeholder="https://example.com/banner.jpg">
+                        <small style="color: var(--text-light); display:block; margin-top: 5px;">Jika diisi, iklan akan ditampilkan sebagai banner gambar penuh (CTA teks diabaikan)</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Ukuran Iklan</label>
+                        <select id="adSize" class="form-control">
+                            <option value="small">Kecil (120px)</option>
+                            <option value="medium" selected>Sedang (200px)</option>
+                            <option value="large">Besar (320px)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width:100%; margin-top: 1rem;">Simpan Iklan</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js?v=218"></script>
+    <script src="admin.js?v=218"></script>
+
+    <!-- Smart Search Overlay -->
+    <div id="searchOverlay" class="search-overlay">
+        <div class="search-field-container">
+            <button class="search-overlay-close" onclick="closeSearch()"><i class="fas fa-times"></i></button>
+            <div class="search-input-wrapper">
+                <i class="fas fa-search search-icon-left"></i>
+                <input type="text" id="globalSearchInput" class="search-overlay-input" placeholder="Cari kursus, kitab, atau fatwa..." autocomplete="off">
+            </div>
+            
+            <div class="search-results-container" id="searchResultsContainer">
+                <div class="search-initial-state" id="searchInitialState">
+                    <p class="search-section-title">Pencarian Populer</p>
+                    <div class="search-popular-tags">
+                        <a href="#" class="search-tag" onclick="document.getElementById('globalSearchInput').value='Aqidah'; document.getElementById('globalSearchInput').dispatchEvent(new Event('input')); return false;">Aqidah</a>
+                        <a href="#" class="search-tag" onclick="document.getElementById('globalSearchInput').value='Shalat'; document.getElementById('globalSearchInput').dispatchEvent(new Event('input')); return false;">Shalat</a>
+                        <a href="#" class="search-tag" onclick="document.getElementById('globalSearchInput').value='Tazkiyatun Nufus'; document.getElementById('globalSearchInput').dispatchEvent(new Event('input')); return false;">Tazkiyatun Nufus</a>
+                        <a href="#" class="search-tag" onclick="document.getElementById('globalSearchInput').value='Bahasa Arab'; document.getElementById('globalSearchInput').dispatchEvent(new Event('input')); return false;">Bahasa Arab</a>
+                    </div>
+                </div>
+                <div class="search-results-list" id="searchResultsList" style="display: none;">
+                    <!-- Results will be injected here via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

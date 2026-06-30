@@ -1,0 +1,142 @@
+<!-- Profile Modals Component -->
+
+<!-- 1. Settings Modal -->
+<div class="modal-overlay" id="settingsModal">
+    <div class="modal-box" style="max-width: 500px; border-radius: 24px; padding: 2.5rem;">
+        <button class="modal-close" onclick="closeProfileModal('settings')"><i class="fas fa-times"></i></button>
+        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; display:flex; align-items:center; gap:10px;">
+            <i class="fas fa-user-cog" style="color:var(--primary-color);"></i> Pengaturan Profil
+        </h2>
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <div class="profile-avatar-initial" style="width: 80px; height: 80px; font-size: 2rem; margin: 0 auto 15px;"></div>
+            <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Ubah Inisial/Foto</button>
+        </div>
+        <form>
+            <div class="form-group" style="margin-bottom: 1rem;">
+                <label class="form-label" style="font-weight: 600; font-size: 0.9rem;">Nama Lengkap</label>
+                <input type="text" class="form-input" value="" style="border-radius: 12px;">
+            </div>
+            <div class="form-group" style="margin-bottom: 1rem;">
+                <label class="form-label" style="font-weight: 600; font-size: 0.9rem;">Email</label>
+                <input type="email" class="form-input" value="" style="border-radius: 12px;">
+            </div>
+            <div class="form-group" style="margin-bottom: 2rem;">
+                <label class="form-label" style="font-weight: 600; font-size: 0.9rem;">Nomor Telepon</label>
+                <input type="tel" class="form-input" value="+62 812-3456-7890" style="border-radius: 12px;">
+            </div>
+            <button type="button" class="btn btn-primary btn-block" style="border-radius: 12px; font-weight: 600;" onclick="closeProfileModal('settings')">Simpan Perubahan</button>
+        </form>
+    </div>
+</div>
+
+<!-- 2. Courses Modal -->
+<div class="modal-overlay" id="coursesModal">
+    <div class="modal-box" style="max-width: 600px; border-radius: 24px; padding: 2.5rem; background: var(--bg-light);">
+        <button class="modal-close" onclick="closeProfileModal('courses')"><i class="fas fa-times"></i></button>
+        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; display:flex; align-items:center; gap:10px;">
+            <i class="fas fa-book-reader" style="color:var(--primary-color);"></i> Kursus Saya
+        </h2>
+        
+        <div id="myCoursesContainer" style="display: flex; flex-direction: column; gap: 1rem; max-height: 55vh; overflow-y: auto; padding-right: 10px;">
+            <!-- Courses will be loaded dynamically by JS -->
+        </div>
+    </div>
+</div>
+
+<!-- 3. Certificates Modal -->
+<div class="modal-overlay" id="certificatesModal">
+    <div class="modal-box" style="max-width: 650px; border-radius: 24px; padding: 2.5rem; background: var(--bg-light);">
+        <button class="modal-close" onclick="closeProfileModal('certificates')"><i class="fas fa-times"></i></button>
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem; display:flex; align-items:center; gap:10px;">
+            <i class="fas fa-certificate" style="color: var(--primary-color);"></i> Sertifikat Kelulusan
+        </h2>
+        <p style="color: var(--text-light); margin-bottom: 1.5rem;">Sertifikat penghargaan atas penyelesaian kursus.</p>
+        
+        <div id="myCertificatesContainer" style="display: grid; grid-template-columns: 1fr; gap: 1.5rem;">
+            <!-- Certificates will be loaded dynamically by JS -->
+        </div>
+    </div>
+</div>
+
+<!-- 4. App Settings Modal -->
+<div class="modal-overlay" id="appSettingsModal">
+    <div class="modal-box" style="max-width: 500px; border-radius: 24px; padding: 2.5rem; background: var(--bg-card);">
+        <button class="modal-close" onclick="closeProfileModal('app-settings')"><i class="fas fa-times"></i></button>
+        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; display:flex; align-items:center; gap:10px; color: var(--text-dark);">
+            <i class="fas fa-cog" style="color:var(--text-light);"></i> Pengaturan Aplikasi
+        </h2>
+        
+        <div style="display: flex; flex-direction: column; gap: 1.5rem; max-height: 60vh; overflow-y: auto; padding-right: 10px;">
+            
+            <!-- Kategori: Tampilan -->
+            <div>
+                <h3 style="font-size: 1rem; color: var(--text-dark); margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Tampilan</h3>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0;">
+                    <div>
+                        <h4 style="font-size: 0.95rem; margin-bottom: 2px; color: var(--text-dark);">Mode Gelap (Dark Mode)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-light);">Ubah tema warna aplikasi</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="setting-darkmode" onchange="toggleTheme()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Kategori: Pemutaran Video -->
+            <div>
+                <h3 style="font-size: 1rem; color: var(--text-dark); margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Pemutaran Video</h3>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; margin-bottom: 0.5rem;">
+                    <div>
+                        <h4 style="font-size: 0.95rem; margin-bottom: 2px; color: var(--text-dark);">Putar Otomatis (Auto-play)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-light);">Lanjutkan ke materi berikutnya</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="setting-autoplay" onchange="saveAppSetting('autoplay', this.checked)">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0;">
+                    <div>
+                        <h4 style="font-size: 0.95rem; margin-bottom: 2px; color: var(--text-dark);">Kualitas Video Default</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-light);">Kualitas awal saat memutar video</p>
+                    </div>
+                    <select id="setting-quality" onchange="saveAppSetting('quality', this.value)" style="padding: 0.5rem; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-light); color: var(--text-dark); font-size: 0.9rem; outline: none;">
+                        <option value="auto">Auto (Disarankan)</option>
+                        <option value="1080p">1080p (HD)</option>
+                        <option value="720p">720p</option>
+                        <option value="480p">480p (Hemat Kuota)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Kategori: Notifikasi -->
+            <div>
+                <h3 style="font-size: 1rem; color: var(--text-dark); margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Notifikasi</h3>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; margin-bottom: 0.5rem;">
+                    <div>
+                        <h4 style="font-size: 0.95rem; margin-bottom: 2px; color: var(--text-dark);">Pemberitahuan Promo &amp; Info</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-light);">Terima info kursus terbaru via Email</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="setting-email-notif" onchange="saveAppSetting('emailNotif', this.checked)">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0;">
+                    <div>
+                        <h4 style="font-size: 0.95rem; margin-bottom: 2px; color: var(--text-dark);">Pengingat Belajar Harian</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-light);">Bantu jaga rutinitas belajar Anda</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="setting-study-reminder" onchange="saveAppSetting('studyReminder', this.checked)">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

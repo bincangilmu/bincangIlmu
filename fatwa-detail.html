@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail Fatwa - Bincang Ilmu</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css?v=218">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    <style>
+        .blog-header {
+            padding: 100px 0 40px;
+            background-color: var(--bg-light);
+            text-align: center;
+        }
+
+        .content-body {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 0;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .content-body h3 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* Q&A Detail Formatting */
+        .qa-detail-box {
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .qa-detail-box.q-box {
+            background-color: #F3F4F6;
+            border-left: 4px solid #9CA3AF;
+        }
+        
+        [data-theme="dark"] .qa-detail-box.q-box {
+            background-color: #111827;
+            border-left-color: #4B5563;
+        }
+
+        .qa-detail-box.a-box {
+            background-color: transparent;
+            border-top: 2px dashed var(--glass-border);
+            padding-top: 2rem;
+            margin-top: 2rem;
+        }
+
+        .qa-badge {
+            display: inline-block;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .q-box .qa-badge {
+            color: #4B5563;
+        }
+        
+        [data-theme="dark"] .q-box .qa-badge {
+            color: #9CA3AF;
+        }
+
+        .a-box .qa-badge {
+            color: var(--primary-color);
+            background: var(--primary-light);
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+<header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <span>bincang</span>
+                <span><span class="highlight">ilmu</span>.</span>
+            </a>
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Beranda</a></li>
+                    <li><a href="courses.html" class="nav-link">Kursus</a></li>
+                    <li><a href="kitab.html" class="nav-link">Kitab</a></li>
+                    <li><a href="fatwa.html" class="nav-link">Fatwa</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="about.html" class="nav-link">Tentang Kami</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="search-toggle" onclick="openSearch()" aria-label="Search"
+                    style="background: none; border: none; font-size: 1.1rem; color: var(--text-dark); cursor: pointer; margin-right: 0.5rem;">
+                    <i class="fas fa-search"></i>
+                </button>
+                <a href="#" class="btn btn-outline" id="loginBtn" onclick="openModal('login'); return false;">Masuk</a>
+                <a href="#" class="btn btn-primary" id="registerBtn"
+                    onclick="openModal('register'); return false;">Daftar Sekarang</a>
+
+                <!-- User Profile (Hidden by default) -->
+                <div class="user-profile-wrapper" id="userProfile" style="display: none;">
+                    <button class="profile-toggle" id="profileToggleBtn"
+                        onclick="toggleProfileMenu(event); return false;">
+                        <div class="profile-avatar-initial"></div>
+                        <span class="profile-name"></span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <!-- Floating Dropdown -->
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <div class="dropdown-header">
+                            <div class="user-info">
+                                <strong></strong>
+                                <span></span>
+                            </div>
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" onclick="openProfileModal('settings'); return false;"><i
+                                        class="fas fa-user-cog"></i> Pengaturan Profil</a></li>
+                            <li><a href="#" onclick="openProfileModal('courses'); return false;"><i
+                                        class="fas fa-book-reader"></i> Kursus Saya</a></li>
+                            <li><a href="#" onclick="openProfileModal('certificates'); return false;"><i
+                                        class="fas fa-certificate"></i> Sertifikat</a></li>
+                            <li><a href="#" onclick="openProfileModal('app-settings'); return false;"><i
+                                        class="fas fa-cog"></i> Setting</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#" onclick="handleLogout(); return false;" class="text-danger"><i
+                                        class="fas fa-sign-out-alt"></i> Log Out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <button class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Blog Header (Title & Meta) -->
+    <div class="blog-header" style="padding-bottom: 20px;">
+        <div class="container">
+            <div class="blog-detail-container">
+                <span class="badge-outline" id="fatwaCategory" style="background: var(--primary-light); border-color: transparent;">Kategori</span>
+                <h1 class="hero-title" id="fatwaTitle"
+                    style="font-size: 2.2rem; margin-top: 1rem; color: var(--text-dark); line-height: 1.4;">Judul Fatwa</h1>
+                <p class="course-meta" style="justify-content: center; margin-top: 1.5rem;">
+                    <span><i class="fas fa-calendar-alt"></i> <span id="fatwaDate">Tanggal</span></span>
+                    <span style="margin: 0 10px;">•</span>
+                    <span><i class="fas fa-user-circle"></i> Dewan Fatwa Bincang Ilmu</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <section class="section">
+        <div class="container">
+            <div class="content-body" id="fatwaContent">
+                <!-- Content injected here -->
+            </div>
+
+            <!-- Smart Share -->
+            <div class="fatwa-share" style="max-width: 800px; margin: 0 auto 3rem; padding-top: 1rem; border-top: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center;">
+                <p style="margin: 0; font-weight: 600;">Bagikan fatwa ini:</p>
+                <button onclick="shareFatwaWhatsApp()" class="btn btn-outline" style="border-color: #25D366; color: #25D366;">
+                    <i class="fab fa-whatsapp"></i> Bagikan ke WhatsApp
+                </button>
+            </div>
+
+            <!-- Related Fatwas -->
+            <div class="related-fatwas" style="max-width: 800px; margin: 0 auto 3rem;">
+                <h3 style="margin-bottom: 1.5rem;">Fatwa Terkait</h3>
+                <div id="relatedFatwasGrid" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <!-- Injected via JS -->
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="fatwa.html" class="btn btn-outline"><i class="fas fa-arrow-left"></i> Kembali ke Fatwa</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo-footer">
+                        <span>bincang</span>
+                        <span><span class="highlight">ilmu</span>.</span>
+                    </a>
+                    <p>Platform edukasi terpercaya untuk menuntut ilmu syar'i dan mendalami kajian Islam sesuai manhaj yang lurus.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Menu</h4>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="courses.html">Kursus</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">Tentang Kami</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Kategori</h4>
+                    <ul>
+                        <li><a href="#">Bahasa Arab</a></li>
+                        <li><a href="#">Fiqih</a></li>
+                        <li><a href="#">Aqidah</a></li>
+                        <li><a href="#">Adab & Akhlak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Hubungi Kami</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> hello@bincangilmu.com</li>
+                        <li><i class="fas fa-phone"></i> +62 812 3456 7890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bincang Ilmu. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Reuse Auth Modal -->
+    
+    <!-- Smart Search Overlay -->
+    <div id="searchOverlay" class="search-overlay">
+        <div class="search-field-container">
+            <button class="search-overlay-close" onclick="closeSearch()"><i class="fas fa-times"></i></button>
+            <div class="search-input-wrapper">
+                <i class="fas fa-search search-icon-left"></i>
+                <input type="text" id="globalSearchInput" class="search-overlay-input" placeholder="Cari kursus, kitab, atau fatwa..." autocomplete="off">
+            </div>
+            
+            <div class="search-results-container" id="searchResultsContainer">
+                <div class="search-initial-state" id="searchInitialState">
+                    <p class="search-section-title">Pencarian Populer</p>
+                    <div class="search-popular-tags">
+                        <a href="#" class="search-tag" onclick="document.getElementById('globalSearchInput').value='Aqidah'; document.getElementById('globalSearchInput').dispatchEvent(new Event('input')); return false;">Aqidah</a>
+                        <a href="#" class="search-tag" onclick="document.getElementById('globalSearchInput').value='Shalat'; document.getElementById('globalSearchInput').dispatchEvent(new Event('input')); return false;">Shalat</a>
+                        <a href="#" class="search-tag" onclick="document.getElementById('globalSearchInput').value='Tazkiyatun Nufus'; document.getElementById('globalSearchInput').dispatchEvent(new Event('input')); return false;">Tazkiyatun Nufus</a>
+                        <a href="#" class="search-tag" onclick="document.getElementById('globalSearchInput').value='Bahasa Arab'; document.getElementById('globalSearchInput').dispatchEvent(new Event('input')); return false;">Bahasa Arab</a>
+                    </div>
+                </div>
+                <div class="search-results-list" id="searchResultsList" style="display: none;">
+                    <!-- Results will be injected here via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" id="loginTabBtn" onclick="switchAuthTab('login')">Masuk</button>
+                <button class="auth-tab-btn" id="registerTabBtn" onclick="switchAuthTab('register')">Daftar</button>
+            </div>
+            <div id="loginForm" class="auth-form active">
+                <form action="#">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" placeholder="nama@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" placeholder="******">
+                        <i class="far fa-eye toggle-password"></i>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block" style="width: 100%">Masuk</button>
+                </form>
+            </div>
+            <div id="registerForm" class="auth-form">
+                <form action="#">
+                    <div class="form-group">
+                        <label class="form-label">Nama Lengkap</label>
+                        <input type="text" class="form-input" placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" placeholder="nama@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" placeholder="******">
+                        <i class="far fa-eye toggle-password"></i>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block" style="width: 100%">Daftar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    
+
+    <script src="script.js?v=218"></script>
+</body>
+
+</html>

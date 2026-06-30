@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruang Kelas - Bincang Ilmu</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css?v=218">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'dark'; // Default dark for player
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+</head>
+<body class="player-body">
+
+    <!-- Minimal Header -->
+    <header class="player-header">
+        <div class="player-header-left">
+            <a href="courses.html" id="backToCourseBtn" class="back-btn"><i class="fas fa-chevron-left"></i> Kembali</a>
+            <div class="player-course-title" id="playerCourseTitle">Memuat...</div>
+        </div>
+        <div class="player-header-right">
+            <div class="progress-wrapper">
+                <div class="progress-text"><span id="progressPercent">0</span>% Selesai</div>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" id="playerProgressBar" style="width: 0%;"></div>
+                </div>
+            </div>
+            <button class="theme-toggle player-theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+    </header>
+
+    <div class="player-layout">
+        <!-- Main Content Area -->
+        <main class="player-main">
+            <div class="player-video-wrapper">
+                <iframe id="playerVideo" src="" title="Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            
+            <div class="player-content-tabs">
+                <div class="course-tabs" style="margin-bottom: 1.5rem;">
+                    <button class="tab-btn active" onclick="openTab('overview')">Ringkasan Materi</button>
+                    <button class="tab-btn" onclick="openTab('qa')">Tanya Jawab</button>
+                </div>
+                
+                <div class="tab-content-container" style="padding: 2rem; background: var(--bg-card); border-radius: var(--radius-lg); border: none; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);">
+                    <!-- Overview Tab -->
+                    <div id="overview" class="tab-content active">
+                        <div class="overview-header">
+                            <h2 id="lessonTitleDisplay" style="margin-bottom: 0.5rem; color: var(--text-dark); font-size: 1.5rem;">Pilih materi di samping</h2>
+                            <div class="overview-meta" style="display: flex; gap: 1rem; margin-bottom: 1.5rem;">
+                                <span class="badge-outline" style="font-size: 0.8rem; border-radius: 99px; padding: 4px 10px; border: 1px solid var(--secondary-color); color: var(--text-light);"><i class="far fa-clock"></i> <span id="lessonDurationDisplay">10 Menit</span></span>
+                                <span class="badge-outline" style="font-size: 0.8rem; border-radius: 99px; padding: 4px 10px; border: 1px solid var(--secondary-color); color: var(--text-light);"><i class="fas fa-signal"></i> Pemula</span>
+                            </div>
+                        </div>
+                        
+                        <div class="instructor-mini-profile" style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--bg-light); border-radius: var(--radius-md); margin-bottom: 2rem;">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Instruktur" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                            <div>
+                                <h4 style="margin-bottom: 0.2rem; color: var(--text-dark);">Ustadz Abu Hanifah, Lc.</h4>
+                                <p style="font-size: 0.85rem; color: var(--text-light); margin: 0;">Instruktur Bahasa Arab</p>
+                            </div>
+                        </div>
+
+                        <div class="overview-body">
+                            <p id="lessonDescDisplay" style="color: var(--text-light); line-height: 1.8; font-size: 1rem;">Klik salah satu video pada menu kurikulum di sebelah kanan untuk mulai belajar. Di sini akan tampil deskripsi atau transkrip singkat mengenai materi yang sedang Anda pelajari.</p>
+                            
+                            <h4 style="margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--text-dark);">Tujuan Pembelajaran:</h4>
+                            <ul style="color: var(--text-light); line-height: 1.6; padding-left: 1.2rem; margin-bottom: 1rem;">
+                                <li>Memahami konteks materi secara mendalam.</li>
+                                <li>Mampu mempraktekkan teori yang diajarkan dalam kehidupan sehari-hari.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Q&A Tab -->
+                    <div id="qa" class="tab-content">
+                        <div class="qa-input-box" style="display: flex; gap: 1rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--glass-border);">
+                            <i class="fas fa-user-circle" style="font-size: 2.5rem; color: #D1D5DB; margin-top: 4px;"></i>
+                            <div style="flex: 1; display: flex; flex-direction: column; gap: 0.75rem;">
+                                <textarea class="form-input" rows="3" placeholder="Tuliskan pertanyaan Anda seputar materi ini..." style="resize: vertical; padding: 1rem; border-radius: 12px; transition: all 0.3s ease; width: 100%; box-sizing: border-box; background-color: #F9FAFB; border: 1px solid #E5E7EB; box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.02);"></textarea>
+                                <div style="text-align: right;">
+                                    <button class="btn btn-primary" style="padding: 0.5rem 1.2rem; font-size: 0.85rem; border-radius: 20px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);">
+                                        <span>Kirim</span> <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Mock Discussion Thread -->
+                        <div class="discussion-thread" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                            <div class="comment-item" style="display: flex; gap: 1rem;">
+                                <i class="fas fa-user-circle" style="font-size: 2.5rem; color: #D1D5DB;"></i>
+                                <div class="comment-body" style="flex: 1;">
+                                    <div class="comment-header" style="margin-bottom: 0.5rem;">
+                                        <strong style="color: var(--text-dark);">Ahmad Faris</strong> <span style="font-size: 0.75rem; color: var(--text-light); margin-left: 0.5rem;">2 hari yang lalu</span>
+                                    </div>
+                                    <p style="color: var(--text-light); font-size: 0.95rem; line-height: 1.5; margin-bottom: 0.75rem;">Ustadz, apakah kaidah ini juga berlaku untuk kata ganti jamak?</p>
+                                    <div class="comment-actions" style="display: flex; gap: 1rem; font-size: 0.85rem; color: var(--text-light); margin-bottom: 1rem;">
+                                        <span style="cursor: pointer;"><i class="far fa-thumbs-up"></i> 12</span>
+                                        <span style="cursor: pointer;"><i class="far fa-comment"></i> Balas</span>
+                                    </div>
+                                    
+                                    <!-- Reply -->
+                                    <div class="comment-item reply" style="display: flex; gap: 1rem; margin-top: 1rem; padding-left: 1rem; border-left: 2px solid var(--glass-border);">
+                                        <i class="fas fa-user-circle" style="font-size: 2rem; color: #9CA3AF;"></i>
+                                        <div class="comment-body" style="flex: 1;">
+                                            <div class="comment-header" style="margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                                                <strong style="color: var(--text-dark);">Ustadz Abu Hanifah, Lc.</strong> 
+                                                <span style="background: var(--primary-color); color: var(--bg-white); font-size: 0.65rem; padding: 2px 6px; border-radius: 4px;">Instruktur</span> 
+                                                <span style="font-size: 0.75rem; color: var(--text-light);">1 hari yang lalu</span>
+                                            </div>
+                                            <p style="color: var(--text-light); font-size: 0.95rem; line-height: 1.5;">Pertanyaan yang bagus Ahmad. Ya, kaidah ini berlaku untuk jamak muzakkar salim, namun ada sedikit penyesuaian harakat di akhir kata. Silakan cek video modul ke-4 untuk penjelasan rincinya.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </main>
+
+        <!-- Curriculum Sidebar -->
+        <aside class="player-sidebar">
+            <div class="player-sidebar-header">
+                <h3>Kurikulum Kelas</h3>
+            </div>
+            
+            <!-- Certificate / Review Button (Hidden by default) -->
+            <div id="certificateBtnContainer" style="display: none; padding: 1rem 1.5rem; border-bottom: 1px solid var(--glass-border); text-align: center; background: transparent;">
+                <button id="sidebarActionBtn" onclick="openCertificateModal()" class="btn btn-primary" style="width: 100%; border: none; font-size: 0.9rem; padding: 0.6rem; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <i class="fas fa-star" id="sidebarActionIcon"></i> <span id="sidebarActionText">Tulis Ulasan</span>
+                </button>
+            </div>
+
+            <div class="player-curriculum" id="playerCurriculumList">
+                <!-- Injected via JS -->
+                <div style="padding: 2rem; text-align: center; color: var(--text-light);">Memuat kurikulum...</div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Certificate Modal -->
+    <div class="modal-overlay" id="certificateModal" style="z-index: 10000;">
+        <div class="modal-box" style="text-align: center; max-width: 480px; padding: 2rem;">
+            <button class="modal-close" onclick="closeCertificateModal()"><i class="fas fa-times"></i></button>
+            
+            <!-- Step 1: Review Form -->
+            <div id="certStep1">
+                <div style="font-size: 3rem; color: var(--primary-color); margin-bottom: 0.5rem;">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2 style="margin-bottom: 0.5rem; color: var(--text-dark);">Selamat!</h2>
+                <p style="color: var(--text-light); margin-bottom: 1.5rem; font-size: 0.95rem;">Anda telah menyelesaikan 100% materi kursus ini. Silakan berikan ulasan Anda untuk membuka sertifikat.</p>
+                
+                <div class="review-stars" style="margin-bottom: 1rem; font-size: 2rem; color: #D1D5DB; cursor: pointer; display: flex; justify-content: center; gap: 5px;">
+                    <i class="fas fa-star rating-star" data-value="1"></i>
+                    <i class="fas fa-star rating-star" data-value="2"></i>
+                    <i class="fas fa-star rating-star" data-value="3"></i>
+                    <i class="fas fa-star rating-star" data-value="4"></i>
+                    <i class="fas fa-star rating-star" data-value="5"></i>
+                </div>
+                
+                <textarea id="reviewText" placeholder="Bagaimana pengalaman Anda belajar di kursus ini? (Opsional)" style="width: 100%; height: 80px; padding: 10px; border-radius: 8px; border: 1px solid var(--glass-border); margin-bottom: 1.5rem; resize: none; font-family: inherit; font-size: 0.9rem;"></textarea>
+                
+                <button onclick="submitReview()" class="btn" style="width: 100%; background: #4B5563; border: none; font-size: 1rem; padding: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    Kirim Ulasan & Buka Sertifikat
+                </button>
+            </div>
+
+            <!-- Step 2: Download Certificate -->
+            <div id="certStep2" style="display: none;">
+                <div style="font-size: 4rem; color: var(--primary-color); margin-bottom: 1rem; animation: pulse-scale 2s infinite;">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h2 style="margin-bottom: 0.5rem; color: var(--text-dark);">Alhamdulillah!</h2>
+                <p style="color: var(--text-light); margin-bottom: 1.5rem;">Terima kasih atas ulasannya. Semoga ilmunya bermanfaat dan berkah. Sertifikat Anda telah siap!</p>
+                
+                <button onclick="downloadCertificate()" class="btn" style="width: 100%; background: #4B5563; border: none; font-size: 1rem; padding: 0.8rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <i class="fas fa-download"></i> Unduh Sertifikat Kelulusan
+                </button>
+                <button onclick="closeCertificateModal()" class="btn btn-outline" style="width: 100%; font-size: 0.9rem;">
+                    Nanti Saja
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js?v=218"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if(typeof initCoursePlayer === 'function') {
+                initCoursePlayer();
+            }
+        });
+
+        function closeCertificateModal() {
+            const modal = document.getElementById('certificateModal');
+            if (modal) modal.classList.remove('active');
+        }
+    </script>
+
+    <!-- Smart Search Overlay -->
+    <div id="searchOverlay" class="search-overlay">
+        <div class="search-field-container">
+            <button class="search-overlay-close" onclick="closeSearch()"><i class="fas fa-times"></i></button>
+            <div class="search-input-wrapper">
+                <i class="fas fa-search search-icon-left"></i>
+                <input type="text" id="globalSearchInput" class="search-overlay-input" placeholder="Cari kursus, kitab, atau fatwa..." autocomplete="off">
+            </div>
+            
+            <div class="search-results-container" id="searchResultsContainer">
+                <div class="search-initial-state" id="searchInitialState">
+                    <p class="search-section-title">Pencarian Populer</p>
+                    <div class="search-popular-tags">
+                        <a href="#" class="search-tag" onclick="document.getElementById('globalSearchInput').value='Aqidah'; document.getElementById('globalSearchInput').dispatchEvent(new Event('input')); return false;">Aqidah</a>
+                        <a href="#" class="search-tag" onclick="document.getElementById('globalSearchInput').value='Shalat'; document.getElementById('globalSearchInput').dispatchEvent(new Event('input')); return false;">Shalat</a>
+                        <a href="#" class="search-tag" onclick="document.getElementById('globalSearchInput').value='Tazkiyatun Nufus'; document.getElementById('globalSearchInput').dispatchEvent(new Event('input')); return false;">Tazkiyatun Nufus</a>
+                        <a href="#" class="search-tag" onclick="document.getElementById('globalSearchInput').value='Bahasa Arab'; document.getElementById('globalSearchInput').dispatchEvent(new Event('input')); return false;">Bahasa Arab</a>
+                    </div>
+                </div>
+                <div class="search-results-list" id="searchResultsList" style="display: none;">
+                    <!-- Results will be injected here via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

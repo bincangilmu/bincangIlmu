@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami - Bincang Ilmu</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css?v=218">
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    <!-- Internal Styles Removed - Migrated to style.css -->
+</head>
+
+<body>
+
+    <!-- Header -->
+    <!-- Header -->
+<header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <span>bincang</span>
+                <span><span class="highlight">ilmu</span>.</span>
+            </a>
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Beranda</a></li>
+                    <li><a href="courses.html" class="nav-link">Kursus</a></li>
+                    <li><a href="kitab.html" class="nav-link">Kitab</a></li>
+                    <li><a href="fatwa.html" class="nav-link">Fatwa</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li><a href="about.html" class="nav-link">Tentang Kami</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="search-toggle" onclick="openSearch()" aria-label="Search"
+                    style="background: none; border: none; font-size: 1.1rem; color: var(--text-dark); cursor: pointer; margin-right: 0.5rem;">
+                    <i class="fas fa-search"></i>
+                </button>
+                <a href="#" class="btn btn-outline" id="loginBtn" onclick="openModal('login'); return false;">Masuk</a>
+                <a href="#" class="btn btn-primary" id="registerBtn"
+                    onclick="openModal('register'); return false;">Daftar Sekarang</a>
+
+                <!-- User Profile (Hidden by default) -->
+                <div class="user-profile-wrapper" id="userProfile" style="display: none;">
+                    <button class="profile-toggle" id="profileToggleBtn"
+                        onclick="toggleProfileMenu(event); return false;">
+                        <div class="profile-avatar-initial"></div>
+                        <span class="profile-name"></span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <!-- Floating Dropdown -->
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <div class="dropdown-header">
+                            <div class="user-info">
+                                <strong></strong>
+                                <span></span>
+                            </div>
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a href="#" onclick="openProfileModal('settings'); return false;"><i
+                                        class="fas fa-user-cog"></i> Pengaturan Profil</a></li>
+                            <li><a href="#" onclick="openProfileModal('courses'); return false;"><i
+                                        class="fas fa-book-reader"></i> Kursus Saya</a></li>
+                            <li><a href="#" onclick="openProfileModal('certificates'); return false;"><i
+                                        class="fas fa-certificate"></i> Sertifikat</a></li>
+                            <li><a href="#" onclick="openProfileModal('app-settings'); return false;"><i
+                                        class="fas fa-cog"></i> Setting</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#" onclick="handleLogout(); return false;" class="text-danger"><i
+                                        class="fas fa-sign-out-alt"></i> Log Out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <button class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+
+
+
+
+
+
+
+
+
+
+    <!-- 1. Native Zig-Zag Hero -->
+    <section class="native-zz-hero section text-center">
+        <div class="container">
+            <div class="native-zz-hero-content reveal-up">
+                <span class="badge mb-3"><i class="fas fa-info-circle"></i> Tentang Bincang Ilmu</span>
+                <h1 class="native-zz-title">Platform <span class="text-gradient">Edukasi</span> Islam Kekinian</h1>
+                <p class="native-zz-desc max-w-700 mx-auto">Menyebarkan ilmu syar'i yang murni, berlandaskan Al-Qur'an dan As-Sunnah sesuai pemahaman Salafush Shalih. Menghubungkan umat dengan para asatidzah berkompeten melalui teknologi modern yang mudah diakses.</p>
+                <div class="native-zz-actions mt-2" style="margin-top: 2rem;">
+                    <a href="courses.html" class="btn btn-primary">Mulai Belajar Gratis</a>
+                </div>
+            </div>
+            
+            <div class="native-zz-banner reveal-up delay-1">
+                <img src="https://images.unsplash.com/photo-1585036156171-384164a8c675?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Bincang Ilmu Platform" class="native-zz-banner-img">
+                
+                <div class="native-zz-stats-overlay">
+                    <div class="native-zz-stat">
+                        <h3>15K+</h3>
+                        <p>Santri Aktif</p>
+                    </div>
+                    <div class="native-zz-stat">
+                        <h3>120+</h3>
+                        <p>Modul Spesifik</p>
+                    </div>
+                    <div class="native-zz-stat">
+                        <h3>45</h3>
+                        <p>Asatidzah</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. Zig-Zag Section (Visi) -->
+    <section class="native-zz-section section bg-light">
+        <div class="container">
+            <div class="native-zz-row reveal-up">
+                <div class="native-zz-image-col">
+                    <img src="https://images.unsplash.com/photo-1494587416117-f102a2ac0a8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Visi Kami" class="native-zz-img shadow-md rounded-lg">
+                </div>
+                <div class="native-zz-text-col">
+                    <div class="native-zz-icon"><i class="fas fa-eye"></i></div>
+                    <h2 class="section-title">Visi Besar Kami</h2>
+                    <p class="native-zz-body">Menjadi institusi pendidikan Islam digital terdepan di Indonesia, yang berfungsi sebagai mercusuar hidayah bagi umat. Kami bercita-cita melahirkan generasi Rabbani yang teguh aqidahnya, luhur akhlaknya, dan tajam intelektualnya dalam menghadapi tantangan zaman modern.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Zig-Zag Section (Misi) -->
+    <section class="native-zz-section section">
+        <div class="container">
+            <div class="native-zz-row reverse reveal-up">
+                <div class="native-zz-image-col">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Misi Kami" class="native-zz-img shadow-md rounded-lg">
+                </div>
+                <div class="native-zz-text-col">
+                    <div class="native-zz-icon"><i class="fas fa-rocket"></i></div>
+                    <h2 class="section-title">Langkah Misi</h2>
+                    <ul class="native-zz-list">
+                        <li>
+                            <div class="list-icon"><i class="fas fa-check"></i></div>
+                            <div>
+                                <h4>Kurikulum Berjenjang</h4>
+                                <p>Menyediakan silabus terstruktur dan teruji validitasnya secara keilmuan.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="list-icon"><i class="fas fa-check"></i></div>
+                            <div>
+                                <h4>Akses Gratis & Terbuka</h4>
+                                <p>Mendemokratisasi akses terhadap ilmu syar'i 100% tanpa dipungut biaya.</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="list-icon"><i class="fas fa-check"></i></div>
+                            <div>
+                                <h4>Menghubungkan Ulama</h4>
+                                <p>Menjembatani para asatidzah berkompeten langsung dengan masyarakat luas.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Native Team (Standard Grid) -->
+    <section id="native-team" class="native-team-section section bg-light">
+        <div class="container">
+            <div class="section-header text-center reveal-up">
+                <h2 class="section-title">Dewan Asatidzah</h2>
+                <p>Dibimbing langsung oleh para pakar di bidangnya.</p>
+            </div>
+            
+            <div class="native-team-grid">
+                <div class="native-profile-card reveal-up text-center" style="padding: 2.5rem 1rem;">
+                    <div class="native-zz-icon" style="margin: 0 auto 1.5rem auto; box-shadow: none; border: 1px solid var(--border-color);"><i class="fas fa-book"></i></div>
+                    <div class="profile-info" style="padding: 0;">
+                        <h4>Dr. Syafiq Riza Basalamah</h4>
+                        <span>Pembina Utama</span>
+                    </div>
+                </div>
+                <div class="native-profile-card reveal-up delay-1 text-center" style="padding: 2.5rem 1rem;">
+                    <div class="native-zz-icon" style="margin: 0 auto 1.5rem auto; box-shadow: none; border: 1px solid var(--border-color);"><i class="fas fa-book"></i></div>
+                    <div class="profile-info" style="padding: 0;">
+                        <h4>Dr. Firanda Andirja</h4>
+                        <span>Pakar Aqidah</span>
+                    </div>
+                </div>
+                <div class="native-profile-card reveal-up delay-2 text-center" style="padding: 2.5rem 1rem;">
+                    <div class="native-zz-icon" style="margin: 0 auto 1.5rem auto; box-shadow: none; border: 1px solid var(--border-color);"><i class="fas fa-book"></i></div>
+                    <div class="profile-info" style="padding: 0;">
+                        <h4>Ust. M. Nuzul Dzikri</h4>
+                        <span>Pakar Adab & Akhlak</span>
+                    </div>
+                </div>
+                <div class="native-profile-card reveal-up delay-3 text-center" style="padding: 2.5rem 1rem;">
+                    <div class="native-zz-icon" style="margin: 0 auto 1.5rem auto; box-shadow: none; border: 1px solid var(--border-color);"><i class="fas fa-book"></i></div>
+                    <div class="profile-info" style="padding: 0;">
+                        <h4>Ust. Ami Nur Baits</h4>
+                        <span>Pakar Fiqih Muamalah</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+<footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo-footer">
+                        <span>bincang</span>
+                        <span><span class="highlight">ilmu</span>.</span>
+                    </a>
+                    <p>Platform edukasi terpercaya untuk menuntut ilmu syar'i dan mendalami kajian Islam sesuai manhaj yang lurus.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Menu</h4>
+                    <ul>
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="courses.html">Kursus</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="about.html">Tentang Kami</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Kategori</h4>
+                    <ul>
+                        <li><a href="#">Bahasa Arab</a></li>
+                        <li><a href="#">Fiqih</a></li>
+                        <li><a href="#">Aqidah</a></li>
+                        <li><a href="#">Adab & Akhlak</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Hubungi Kami</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> hello@bincangilmu.com</li>
+                        <li><i class="fas fa-phone"></i> +62 812 3456 7890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Jakarta, Indonesia</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Bincang Ilmu. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+    
+    <!-- Smart Search Overlay -->
+    <div id="searchOverlay" class="search-overlay">
+        <div class="search-field-container">
+            <button class="search-overlay-close" onclick="closeSearch()"><i class="fas fa-times"></i></button>
+            <div class="search-input-wrapper">
+                <i class="fas fa-search search-icon-left"></i>
+                <input type="text" id="globalSearchInput" class="search-overlay-input" placeholder="Cari kursus, kitab, atau fatwa..." autocomplete="off">
+            </div>
+            
+            <div class="search-results-container" id="searchResultsContainer">
+                <div class="search-initial-state" id="searchInitialState">
+                    <p class="search-section-title">Pencarian Populer</p>
+                    <div class="search-popular-tags">
+                        <a href="#" class="search-tag" onclick="document.getElementById('globalSearchInput').value='Aqidah'; document.getElementById('globalSearchInput').dispatchEvent(new Event('input')); return false;">Aqidah</a>
+                        <a href="#" class="search-tag" onclick="document.getElementById('globalSearchInput').value='Shalat'; document.getElementById('globalSearchInput').dispatchEvent(new Event('input')); return false;">Shalat</a>
+                        <a href="#" class="search-tag" onclick="document.getElementById('globalSearchInput').value='Tazkiyatun Nufus'; document.getElementById('globalSearchInput').dispatchEvent(new Event('input')); return false;">Tazkiyatun Nufus</a>
+                        <a href="#" class="search-tag" onclick="document.getElementById('globalSearchInput').value='Bahasa Arab'; document.getElementById('globalSearchInput').dispatchEvent(new Event('input')); return false;">Bahasa Arab</a>
+                    </div>
+                </div>
+                <div class="search-results-list" id="searchResultsList" style="display: none;">
+                    <!-- Results will be injected here via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal Component -->
+    <!-- Auth Modal -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+
+            <div class="auth-tabs">
+                <button class="auth-tab-btn active" id="loginTabBtn" onclick="switchAuthTab('login')">Masuk</button>
+                <button class="auth-tab-btn" id="registerTabBtn" onclick="switchAuthTab('register')">Daftar</button>
+            </div>
+
+            <!-- Login Form -->
+            <div id="loginForm" class="auth-form active">
+                <form action="#">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" placeholder="nama@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" placeholder="******">
+                        <i class="far fa-eye toggle-password"></i>
+                    </div>
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox"> Ingat Saya
+                        </label>
+                        <a href="#" class="forgot-password">Lupa Password?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block" style="width: 100%">Masuk</button>
+                </form>
+
+                <div class="divider"><span>Atau masuk dengan</span></div>
+
+                <button class="btn-google">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google">
+                    Masuk dengan Google
+                </button>
+
+                <p class="text-center mt-3" style="font-size: 0.9rem; color: var(--text-light); margin-top: 1.5rem">
+                    Belum punya akun? <a href="#" onclick="switchAuthTab('register')"
+                        style="color: var(--primary-color); font-weight: 500">Daftar Sekarang</a>
+                </p>
+            </div>
+
+            <!-- Register Form -->
+            <div id="registerForm" class="auth-form">
+                <form action="#">
+                    <div class="form-group">
+                        <label class="form-label">Nama Lengkap</label>
+                        <input type="text" class="form-input" placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" placeholder="nama@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" placeholder="******">
+                        <i class="far fa-eye toggle-password"></i>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Konfirmasi Password</label>
+                        <input type="password" class="form-input" placeholder="******">
+                        <i class="far fa-eye toggle-password"></i>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block" style="width: 100%">Daftar</button>
+                </form>
+
+                <div class="divider"><span>Atau daftar dengan</span></div>
+
+                <button class="btn-google">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google">
+                    Daftar dengan Google
+                </button>
+                <p class="text-center mt-3" style="font-size: 0.9rem; color: var(--text-light); margin-top: 1.5rem">
+                    Sudah punya akun? <a href="#" onclick="switchAuthTab('login')"
+                        style="color: var(--primary-color); font-weight: 500">Masuk</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Profile Modals Component -->
+<!-- Profile Modals Component -->
+
+<!-- 1. Settings Modal -->
+<div class="modal-overlay" id="settingsModal">
+    <div class="modal-box" style="max-width: 500px; border-radius: 24px; padding: 2.5rem;">
+        <button class="modal-close" onclick="closeProfileModal('settings')"><i class="fas fa-times"></i></button>
+        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; display:flex; align-items:center; gap:10px;">
+            <i class="fas fa-user-cog" style="color:var(--primary-color);"></i> Pengaturan Profil
+        </h2>
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <div class="profile-avatar-initial" style="width: 80px; height: 80px; font-size: 2rem; margin: 0 auto 15px;"></div>
+            <button class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Ubah Inisial/Foto</button>
+        </div>
+        <form>
+            <div class="form-group" style="margin-bottom: 1rem;">
+                <label class="form-label" style="font-weight: 600; font-size: 0.9rem;">Nama Lengkap</label>
+                <input type="text" class="form-input" value="" style="border-radius: 12px;">
+            </div>
+            <div class="form-group" style="margin-bottom: 1rem;">
+                <label class="form-label" style="font-weight: 600; font-size: 0.9rem;">Email</label>
+                <input type="email" class="form-input" value="" style="border-radius: 12px;">
+            </div>
+            <div class="form-group" style="margin-bottom: 2rem;">
+                <label class="form-label" style="font-weight: 600; font-size: 0.9rem;">Nomor Telepon</label>
+                <input type="tel" class="form-input" value="+62 812-3456-7890" style="border-radius: 12px;">
+            </div>
+            <button type="button" class="btn btn-primary btn-block" style="border-radius: 12px; font-weight: 600;" onclick="closeProfileModal('settings')">Simpan Perubahan</button>
+        </form>
+    </div>
+</div>
+
+<!-- 2. Courses Modal -->
+<div class="modal-overlay" id="coursesModal">
+    <div class="modal-box" style="max-width: 600px; border-radius: 24px; padding: 2.5rem; background: var(--bg-light);">
+        <button class="modal-close" onclick="closeProfileModal('courses')"><i class="fas fa-times"></i></button>
+        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; display:flex; align-items:center; gap:10px;">
+            <i class="fas fa-book-reader" style="color:var(--primary-color);"></i> Kursus Saya
+        </h2>
+        
+        <div id="myCoursesContainer" style="display: flex; flex-direction: column; gap: 1rem; max-height: 55vh; overflow-y: auto; padding-right: 10px;">
+            <!-- Courses will be loaded dynamically by JS -->
+        </div>
+    </div>
+</div>
+
+<!-- 3. Certificates Modal -->
+<div class="modal-overlay" id="certificatesModal">
+    <div class="modal-box" style="max-width: 650px; border-radius: 24px; padding: 2.5rem; background: var(--bg-light);">
+        <button class="modal-close" onclick="closeProfileModal('certificates')"><i class="fas fa-times"></i></button>
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem; display:flex; align-items:center; gap:10px;">
+            <i class="fas fa-certificate" style="color: var(--primary-color);"></i> Sertifikat Kelulusan
+        </h2>
+        <p style="color: var(--text-light); margin-bottom: 1.5rem;">Sertifikat penghargaan atas penyelesaian kursus.</p>
+        
+        <div id="myCertificatesContainer" style="display: grid; grid-template-columns: 1fr; gap: 1.5rem;">
+            <!-- Certificates will be loaded dynamically by JS -->
+        </div>
+    </div>
+</div>
+
+<!-- 4. App Settings Modal -->
+<div class="modal-overlay" id="appSettingsModal">
+    <div class="modal-box" style="max-width: 500px; border-radius: 24px; padding: 2.5rem; background: var(--bg-card);">
+        <button class="modal-close" onclick="closeProfileModal('app-settings')"><i class="fas fa-times"></i></button>
+        <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem; display:flex; align-items:center; gap:10px; color: var(--text-dark);">
+            <i class="fas fa-cog" style="color:var(--text-light);"></i> Pengaturan Aplikasi
+        </h2>
+        
+        <div style="display: flex; flex-direction: column; gap: 1.5rem; max-height: 60vh; overflow-y: auto; padding-right: 10px;">
+            
+            <!-- Kategori: Tampilan -->
+            <div>
+                <h3 style="font-size: 1rem; color: var(--text-dark); margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Tampilan</h3>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0;">
+                    <div>
+                        <h4 style="font-size: 0.95rem; margin-bottom: 2px; color: var(--text-dark);">Mode Gelap (Dark Mode)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-light);">Ubah tema warna aplikasi</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="setting-darkmode" onchange="toggleTheme()">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Kategori: Pemutaran Video -->
+            <div>
+                <h3 style="font-size: 1rem; color: var(--text-dark); margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Pemutaran Video</h3>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; margin-bottom: 0.5rem;">
+                    <div>
+                        <h4 style="font-size: 0.95rem; margin-bottom: 2px; color: var(--text-dark);">Putar Otomatis (Auto-play)</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-light);">Lanjutkan ke materi berikutnya</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="setting-autoplay" onchange="saveAppSetting('autoplay', this.checked)">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0;">
+                    <div>
+                        <h4 style="font-size: 0.95rem; margin-bottom: 2px; color: var(--text-dark);">Kualitas Video Default</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-light);">Kualitas awal saat memutar video</p>
+                    </div>
+                    <select id="setting-quality" onchange="saveAppSetting('quality', this.value)" style="padding: 0.5rem; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-light); color: var(--text-dark); font-size: 0.9rem; outline: none;">
+                        <option value="auto">Auto (Disarankan)</option>
+                        <option value="1080p">1080p (HD)</option>
+                        <option value="720p">720p</option>
+                        <option value="480p">480p (Hemat Kuota)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Kategori: Notifikasi -->
+            <div>
+                <h3 style="font-size: 1rem; color: var(--text-dark); margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Notifikasi</h3>
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; margin-bottom: 0.5rem;">
+                    <div>
+                        <h4 style="font-size: 0.95rem; margin-bottom: 2px; color: var(--text-dark);">Pemberitahuan Promo & Info</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-light);">Terima info kursus terbaru via Email</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="setting-email-notif" onchange="saveAppSetting('emailNotif', this.checked)">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0;">
+                    <div>
+                        <h4 style="font-size: 0.95rem; margin-bottom: 2px; color: var(--text-dark);">Pengingat Belajar Harian</h4>
+                        <p style="font-size: 0.8rem; color: var(--text-light);">Bantu jaga rutinitas belajar Anda</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="setting-study-reminder" onchange="saveAppSetting('studyReminder', this.checked)">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+    <!-- Main Script -->
+    <script src="script.js?v=218"></script>
+</body>
+
+</html>
